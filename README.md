@@ -10,6 +10,8 @@ Inside bodega folder copy .env.example file into .env
 
 Inside cocina folder copy .env.example file into .env
 
+
+In root folder:
 ```
 make build
 ```
