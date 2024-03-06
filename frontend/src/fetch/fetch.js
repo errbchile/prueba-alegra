@@ -3,6 +3,17 @@ import axios from "axios";
 const apiCocina = import.meta.env.VITE_API_COCINA;
 const apiBodega = import.meta.env.VITE_API_BODEGA;
 
+export const fetchAvailableDishes = async () => {
+  try {
+    const response = await axios.get(
+      `${apiCocina}/api/dishes/available-dishes`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Error al cargar los datos");
+  }
+};
+
 export const fetchStatistics = async () => {
   try {
     const response = await axios.get(`${apiBodega}/api/statistics`);
