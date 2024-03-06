@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
+import { apiCocina } from "../fetch/fetch";
 
 export default function MainButton() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
     () => {
-      return axios.post("http://127.0.0.1:8001/api/orders");
+      return axios.post(`${apiCocina}/api/orders`);
     },
     {
       onSuccess: () => {
