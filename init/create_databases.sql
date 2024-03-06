@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `bodega`;
+CREATE DATABASE IF NOT EXISTS `cocina`;
+
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'local';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';

@@ -1,0 +1,98 @@
+version: "3.7"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    environment:
+      VITE_API_COCINA: http://192.168.1.131:8001
+      VITE_API_BODEGA: http://192.168.1.131:8000
+    ports:
+      - "3000:5173"
+    networks:
+      - microservices_network
+
+  nginx_cocina:
+    image: nginx:stable-alpine
+    container_name: nginx_cocina
+    ports:
+      - 8001:80
+    volumes:
+      - ./cocina:/var/www/html
+      - ./cocina/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - cocina
+      - mysql_container
+    networks:
+      - microservices_network
+
+  nginx_bodega:
+    image: nginx:stable-alpine
+    container_name: nginx_bodega
+    ports:
+      - 8000:81
+    volumes:
+      - ./bodega:/var/www/html
+      - ./bodega/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - bodega
+      - mysql_container
+    networks:
+      - microservices_network
+
+  mysql_container:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3306:3306
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./cocina/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: local
+    networks:
+      - microservices_network
+
+  cocina:
+    build:
+      context: ./cocina
+      dockerfile: Dockerfile
+    container_name: cocina
+    ports:
+      - "8081:80"
+    volumes:
+      - ./cocina:/var/www/html
+    networks:
+      - microservices_network
+    environment:
+      API_BODEGA_URL: http://192.168.1.131:8000
+
+  bodega:
+    build:
+      context: ./bodega
+      dockerfile: Dockerfile
+    container_name: bodega
+    ports:
+      - "8080:80"
+    volumes:
+      - ./bodega:/var/www/html
+    networks:
+      - microservices_network
+    environment:
+      API_COCINA_URL: http://192.168.1.131:8001
+      API_MARKET_URL: https://recruitment.alegra.com/api/farmers-market/buy
+
+networks:
+  microservices_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mysql_container:
+    driver: local
