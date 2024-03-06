@@ -21,3 +21,19 @@ make setup
 ```
 
 Check project in: [http://localhost:3000](http://localhost:3000)
+
+
+
+
+
+
+Single repositories:
+
+cocina:
+https://github.com/errbchile/alegra-cocina
+
+Bodega:
+https://github.com/errbchile/alegra-bodega
+
+Frontend:
+https://github.com/errbchile/alegra-frontend
