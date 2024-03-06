@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     environment:
-      VITE_API_COCINA: http://192.168.1.131:8001
-      VITE_API_BODEGA: http://192.168.1.131:8000
+      VITE_API_COCINA: http://3.136.159.54:8001
+      VITE_API_BODEGA: http://3.136.159.54:8000
     ports:
       - "3000:5173"
     networks:
@@ -71,7 +71,7 @@ services:
     networks:
       - microservices_network
     environment:
-      API_BODEGA_URL: http://192.168.1.131:8000
+      API_BODEGA_URL: http://3.136.159.54:8000
 
   bodega:
     build:
@@ -85,7 +85,7 @@ services:
     networks:
       - microservices_network
     environment:
-      API_COCINA_URL: http://192.168.1.131:8001
+      API_COCINA_URL: http://3.136.159.54:8001
       API_MARKET_URL: https://recruitment.alegra.com/api/farmers-market/buy
 
 networks:
