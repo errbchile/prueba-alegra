@@ -4,7 +4,7 @@ import { fetchFinishedOrders } from "../fetch/fetch";
 
 export default function ColumnReadyToBeServed() {
   const { data, isSuccess } = useQuery("finished-orders", fetchFinishedOrders, {
-    refetchInterval: 1000,
+    refetchInterval: 3000,
   });
 
   return (

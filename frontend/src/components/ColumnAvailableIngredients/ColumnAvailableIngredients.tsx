@@ -4,7 +4,7 @@ import { fetchStatistics } from "../../fetch/fetch";
 
 export default function ColumnAvailableIngredients() {
   const { data, isSuccess } = useQuery("statistics", fetchStatistics, {
-    refetchInterval: 1000,
+    refetchInterval: 3000,
   });
 
   return (

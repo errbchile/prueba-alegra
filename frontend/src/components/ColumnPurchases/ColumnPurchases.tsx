@@ -4,7 +4,7 @@ import { fetchPurchases } from "../../fetch/fetch";
 
 export default function ColumnPurchases() {
   const { data, isSuccess } = useQuery("purchases", fetchPurchases, {
-    refetchInterval: 1000,
+    refetchInterval: 3000,
   });
 
   return (

@@ -4,7 +4,7 @@ import { fetchPendingOrders } from "../fetch/fetch";
 
 export default function ColumnWaitingIngredients() {
   const { data, isSuccess } = useQuery("pending-orders", fetchPendingOrders, {
-    refetchInterval: 1000,
+    refetchInterval: 3000,
   });
 
   return (
