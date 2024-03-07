@@ -9,4 +9,4 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # da permisos para editar los archivos en esta ruta del container
 RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www
+RUN chmod 755 /var/www
